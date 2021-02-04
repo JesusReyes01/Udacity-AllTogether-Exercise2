@@ -7,8 +7,8 @@ class MessageInput extends Component {
   }
 
   scrollToBottom = () => {
-    animateScroll.scrollToBottom({containerId: "Amy"});
-    animateScroll.scrollToBottom({containerId: "John"});
+    animateScroll.scrollToBottom({duration: 200, containerId: "Amy"});
+    animateScroll.scrollToBottom({duration: 200,containerId: "John"});
   }
 
   handleInput = (event) => {
