@@ -1,67 +1,36 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import MessageWindow from './MessageWindow';
+import MessageInput from './MessageInput';
 
-class Screen extends Component {
-	state = {
-      message: ''
-    }
+const Screen = (props) => {
 
-    handleInput = (event) => {
-      event.preventDefault()
-      this.setState({...this.state, [event.target.name]: event.target.value})
-    }
-
-    isDisabled = () => {
-      return this.state.message === '';
-    };
-
-	handleSubmit = (event) => {
-      event.preventDefault();
-      this.props.submitMessage(this.props.user.username, this.state.message)
-      this.setState({message: ''})
-    }
-      
-    render() {
-        const {username} = this.props.user
-		const {messages} = this.props
+     
+        const {username} = props.user
+		const {messages} = props
+        
 
   		return (
       		<div className="chat-window">
               <h2>Super Awesome Chat</h2>
               <div className="name sender">{username}</div>
 
-              <ul className="message-list">
-                {messages.map((message, index) => (
-                  <li
-                    key={index}
-                    className={
-                      message.username === username ? 'message sender' : 'message recipient'
-                    }
-                  >
-                    <p>{`${message.username}: ${message.text}`}</p>
-                  </li>
-                ))}
-              </ul>
-
-              <div>
-                <form className="input-group" onSubmit={this.handleSubmit}>
-                  <input 
-                      type="text" 
-                      className="form-control" 
-                      placeholder="Enter your message..." 
-                      value={this.state.message}
-                      onChange={this.handleInput}
-                      name='message'/>
-                  <div className="input-group-append">
-                    <button className="btn submit-button" disabled={this.isDisabled()}>
-                      SEND
-                    </button>
-                  </div>
-                </form>
-              </div>
+                <MessageWindow 
+                	username={username}
+                	messages={messages}/>
+                <MessageInput
+                	submitMessage={props.submitMessage}
+                	username={username}/>
 			</div>
       
       	)
-    }
+	
 }
 
-export default Screen
+Screen.propTypes = {
+  submitMessage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  messages: PropTypes.array.isRequired,
+};
+
+export default Screen;
