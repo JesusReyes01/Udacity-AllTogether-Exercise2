@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { animateScroll } from "react-scroll";
 
 class MessageInput extends Component {
@@ -49,4 +50,8 @@ class MessageInput extends Component {
   }
 }
 
+MessageInput.propTypes = {
+  username: PropTypes.string.isRequired,
+  submitMessage: PropTypes.func.isRequired,
+};
 export default MessageInput;
