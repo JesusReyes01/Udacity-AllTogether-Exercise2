@@ -29,16 +29,16 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-        <div className="container">   
-    	  <Screen
-				messages={messages}
-				user={users[0]}
-				submitMessage={this.submitMessage}/>
-			<Screen
-				messages={messages}
-				user={users[1]}
-				submitMessage={this.submitMessage}/>
-          
+        <div className="container"> 
+			{users.map( e => {
+             	return (
+				  <Screen
+                    messages={messages}
+                    user={e}
+                    submitMessage={this.submitMessage}/>
+             	) 
+            })}
+
         </div>
       </div>
     );
